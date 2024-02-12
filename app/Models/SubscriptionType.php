@@ -13,4 +13,9 @@ class SubscriptionType extends Model
     {
         return $this->hasMany(Card::class);
     }
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
 }

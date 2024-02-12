@@ -13,4 +13,9 @@ class Role extends Model
     {
         return $this->hasMany(User::class);
     }
+
+    public function subscriptionTypes()
+    {
+        return $this->hasMany(SubscriptionType::class);
+    }
 }

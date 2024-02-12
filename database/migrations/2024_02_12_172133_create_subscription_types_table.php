@@ -17,6 +17,7 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->text('description')->nullable();
             $table->integer('duration_in_days');
+            $table->foreignId('user_id')->constrained();
             $table->timestamps();
         });
     }
