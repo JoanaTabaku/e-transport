@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController; // Import LoginController
+use App\Http\Controllers\Auth\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,5 +30,15 @@ Route::post('/login', [LoginController::class, 'login']); // Update to accept PO
 //     // Add more admin routes here
 // });
 
-Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
+// Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
+
+// Route::namespace('Admin')->group(function () {
+//     Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
+//     // Other admin routes
+// });
+
+// Route::namespace('User')->middleware(['auth'])->group(function () {
+//     // User routes
+//     Route::get('/', 'DashboardController@index')->name('user.dashboard');
+// });
