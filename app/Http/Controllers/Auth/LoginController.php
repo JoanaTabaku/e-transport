@@ -34,5 +34,5 @@ class LoginController extends Controller
             // Authentication failed
             return redirect()->back()->withErrors(['message' => 'Invalid credentials']);
         }
-    }    
+    }
 }
