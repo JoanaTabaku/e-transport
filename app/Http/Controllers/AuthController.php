@@ -1,20 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class LoginController extends Controller
+class AuthController extends Controller
 {
-    // Show the login form
     public function showLoginForm()
     {
         return view('auth.login');
     }
 
     // Handle login form submission
+    // fix this method
     public function login(Request $request)
     {
         $credentials = $request->only('email', 'password');
@@ -35,4 +35,16 @@ class LoginController extends Controller
             return redirect()->back()->withErrors(['message' => 'Invalid credentials']);
         }
     }
+
+    public function showRegistrationForm()
+    {
+        return view('auth.register');
+    }
+
+    // Handle register form submission
+    public function register()
+    {
+        // make validations and insert user into databasa
+    }
+
 }

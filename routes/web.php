@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,12 +19,12 @@ use App\Http\Controllers\Auth\LoginController;
 */
 
 // Registration routes
-Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
-Route::post('/register', [RegisterController::class, 'register']);
+Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
 
 // Login routes
-Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [LoginController::class, 'login']); // Update to accept POST method
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']); // Update to accept POST method
 
 // Admin routes
 // Route::middleware(['auth'])->group(function () {
@@ -32,13 +34,6 @@ Route::post('/login', [LoginController::class, 'login']); // Update to accept PO
 
 // Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
-
-// Route::namespace('Admin')->group(function () {
-//     Route::get('/admin', [DashboardController::class, 'index'])->name('admin.dashboard');
-//     // Other admin routes
-// });
-
-// Route::namespace('User')->middleware(['auth'])->group(function () {
-//     // User routes
-//     Route::get('/', 'DashboardController@index')->name('user.dashboard');
-// });
+// Panel Routes
+Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');

@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class SubscriptionsController extends Controller
+class UserController extends Controller
 {
     public function index()
     {

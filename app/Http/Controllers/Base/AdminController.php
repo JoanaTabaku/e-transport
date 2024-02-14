@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Base;
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class AdminController extends Controller
 {
@@ -10,6 +11,4 @@ class AdminController extends Controller
     {
         return view('admin.dashboard');
     }
-
-    // Add more methods for other functionalities
 }
