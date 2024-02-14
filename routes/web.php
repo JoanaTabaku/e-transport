@@ -19,21 +19,34 @@ use App\Http\Controllers\Panel\RolesController;
 |
 */
 
-// Registration routes
+// // Registration routes
+// Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
+// Route::post('/register', [AuthController::class, 'register']);
+
+// // Login routes
+// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+// Route::post('/login', [AuthController::class, 'login']); // Update to accept POST method
+
+
+
+// // Panel Routes
+// Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+// Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+
+
+// Redirect unauthenticated users to the login form
+Route::middleware('auth')->group(function () {
+    Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+});
+
+// Login and registration routes
+Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-// Login routes
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']); // Update to accept POST method
-
-// Admin routes
-// Route::middleware(['auth'])->group(function () {
-//     Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
-//     // Add more admin routes here
-// });
-
-// Route::get('/admin', [AdminController::class, 'index'])->name('admin.dashboard');
 
 // Admin Panel Routes
 Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
