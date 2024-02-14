@@ -35,7 +35,7 @@ use App\Http\Controllers\AuthController;
 
 // Redirect unauthenticated users to the login form
 Route::middleware('auth')->group(function () {
-    Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 });
 
@@ -44,3 +44,6 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
+
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
