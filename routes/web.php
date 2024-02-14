@@ -4,8 +4,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Auth\LoginController;
-use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\Panel\RolesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +45,20 @@ Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
 Route::post('/login', [AuthController::class, 'login']);
 Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-
-
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+
+// Admin Panel Routes
+Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+
+// Roles
+Route::get('/admin/roles', [RolesController::class, 'index'])->name('admin.roles');
+Route::get('/admin/roles/{id}', [RolesController::class, 'show'])->name('admin.view.role');
+Route::get('/admin/roles/edit/{id}', [RolesController::class, 'edit'])->name('admin.edit.role');
+Route::post('/admin/roles/edit/{id}', [RolesController::class, 'update'])->name('admin.update.role');
+Route::post('/admin/roles/{id}', [RolesController::class, 'delete'])->name('admin.delete.role');
+
+
+
+// User Panel Routes
+Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
