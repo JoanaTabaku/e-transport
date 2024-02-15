@@ -26,10 +26,10 @@ class AuthController extends Controller
     {
         $credentials = $request->only('email', 'password');
         // dd($credentials);
-    
+
         if (Auth::attempt($credentials)) {
             // Authentication passed
-            return redirect()->intended('/dashboard');
+            return redirect()->intended('/');
         } else {
             // Authentication failed
             return redirect()->back()->withErrors(['message' => 'Invalid credentials']);
@@ -38,6 +38,9 @@ class AuthController extends Controller
 
     public function showRegistrationForm()
     {
+        if (Auth::check()) {
+            return redirect()->route('user.dashboard'); // Or 'admin.dashboard' depending on the user's role
+        }
         return view('auth.register');
     }
 

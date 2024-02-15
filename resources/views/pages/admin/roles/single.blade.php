@@ -24,7 +24,8 @@
                             <a href="{{route('admin.edit.role', $role->id)}}" class="btn btn-warning btn-icon-split">
                                 <span class="text">Edit</span>
                             </a>
-                            <a href="{{route('admin.delete.role', $role->id)}}" id="delete-role" class="btn btn-danger btn-icon-split">
+                            <a href="{{ route('admin.delete.role', $role->id) }}" id="delete-role" class="btn btn-danger btn-icon-split"
+                                onclick="return confirm('Are you sure you want to delete this role?');">
                                 <span class="text">Delete</span>
                             </a>
                         </div>

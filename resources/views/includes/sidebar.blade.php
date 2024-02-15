@@ -57,8 +57,8 @@
             <span>Manage Orders (Cards)</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{Route::currentRouteName() == 'admin.users' ? 'active' : ''}}">
+        <a class="nav-link" href="{{route('admin.users')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Manage Users</span>
         </a>
