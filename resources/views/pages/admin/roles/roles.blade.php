@@ -5,12 +5,12 @@
 
     <!-- Page Heading -->
     <h1 class="h3 mb-3 text-gray-800">Manage Roles</h1>
-   
+
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
         <div class="card-header py-2">
             <div class="d-flex align-items-center justify-content-end">
-                <a href="#" class="btn btn-success btn-icon-split">
+                <a href="{{route('admin.new.role')}}" class="btn btn-success btn-icon-split">
                     <span class="icon text-white-50">
                         <i class="fas fa-check"></i>
                     </span>
@@ -41,7 +41,8 @@
                                         <a href="{{route('admin.edit.role', $role->id)}}" class="btn btn-warning btn-icon-split">
                                             <span class="text">Edit</span>
                                         </a>
-                                        <a href="{{route('admin.delete.role', $role->id)}}" id="delete-role" class="btn btn-danger btn-icon-split">
+                                        <a href="{{ route('admin.delete.role', $role->id) }}" id="delete-role" class="btn btn-danger btn-icon-split"
+                                            onclick="return confirm('Are you sure you want to delete this role?');">
                                             <span class="text">Delete</span>
                                         </a>
                                     </div>
