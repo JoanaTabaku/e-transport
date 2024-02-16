@@ -72,11 +72,20 @@
             <span>Manage Roles</span>
         </a>
     </li>
-    <li class="nav-item {{Route::currentRouteName() == 'admin.notifications' ? 'active' : ''}}">
-        <a class="nav-link" href="{{route('admin.notifications')}}">
-            <i class="fas fa-fw fa-tachometer-alt"></i>
-            <span>Manage Notifications</span>
-        </a>
-    </li>
+    @if (Auth::user()->role->name !== 'admin')
+        <li class="nav-item {{Route::currentRouteName() == 'user.notifications' ? 'active' : ''}}">
+            <a class="nav-link" href="{{route('user.notifications')}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>My Notifications</span>
+            </a>
+        </li>
+    @else
+        <li class="nav-item {{Route::currentRouteName() == 'admin.notifications' ? 'active' : ''}}">
+            <a class="nav-link" href="{{route('admin.notifications')}}">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Manage Notifications</span>
+            </a>
+        </li>
+    @endif
 </ul>
 <!-- End of Sidebar -->
