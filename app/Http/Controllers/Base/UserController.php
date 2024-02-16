@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Base;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User; // Assuming your User model is imported
+use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -17,13 +18,13 @@ class UserController extends Controller
     public function userProfile()
     {
         $user = Auth::user(); // Get the authenticated user
-        return view('pages.user.profile.edit', compact('user')); 
+        return view('pages.user.profile.edit', compact('user'));
     }
 
     public function editProfile()
     {
         $user = Auth::user(); // Get the authenticated user
-        return view('pages.user.profile.edit', compact('user')); 
+        return view('pages.user.profile.edit', compact('user'));
     }
 
     public function updateProfile(Request $request)
@@ -35,6 +36,22 @@ class UserController extends Controller
         'email' => 'required|string|email|max:255|unique:users,email,' . Auth::user()->id,
     ]);
 
+    // Check if the new password is provided
+    if ($request->filled('new_password')) {
+        $request->validate([
+            'current_password' => 'required|string',
+            'new_password' => 'required|string|min:8|confirmed',
+        ]);
+
+        // Check if the current password matches the authenticated user's password
+        if (!Hash::check($request->current_password, Auth::user()->password)) {
+            return redirect()->back()->withErrors(['current_password' => 'The current password is incorrect.']);
+        }
+
+        // Update the password
+        $validatedData['password'] = Hash::make($request->new_password);
+    }
+
     // Update user profile data
     $user = Auth::user();
     $user->update($validatedData);
@@ -42,5 +59,4 @@ class UserController extends Controller
     // Redirect back to the profile page with a success message
     return redirect()->route('user.profile')->with('success', 'Profile updated successfully');
 }
-
 }

@@ -6,13 +6,19 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Pagination\Paginator;
+
 
 class UsersController extends Controller
 {
     public function index()
     {
-        $users = User::orderBy('id', 'desc')->get();
+        // $users = User::orderBy('id', 'desc')->get();
+        // return view('pages.admin.users.users', compact('users'));
+
+        $users = User::orderBy('id', 'desc')->paginate(5); // Paginate with 5 users per page
         return view('pages.admin.users.users', compact('users'));
+        
     }
 
     public function show($userId)

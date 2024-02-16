@@ -12,10 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('subscription_types', function (Blueprint $table) {
-            $table->dropForeign(['user_id']);
             $table->renameColumn('user_id', 'role_id');
+            $table->dropForeign(['user_id']);
             $table->foreign('role_id')->references('id')->on('roles');
-        });
+        });        
     }
 
     /**

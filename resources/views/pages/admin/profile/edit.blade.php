@@ -8,7 +8,7 @@
                 <div class="card-header">Edit Profile</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('user.profile.update') }}">
+                    <form method="POST" action="{{ route('admin.profile.update') }}">
                         @csrf
 
                         <!-- Display all validation errors -->

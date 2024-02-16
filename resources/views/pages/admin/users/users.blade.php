@@ -1,7 +1,7 @@
 @extends('layouts.default')
 @section('content')
- <!-- Begin Page Content -->
- <div class="container-fluid">
+<!-- Begin Page Content -->
+<div class="container-fluid">
 
     <!-- Page Heading -->
     <h1 class="h3 mb-3 text-gray-800">Manage Users</h1>
@@ -33,30 +33,37 @@
                     </thead>
                     <tbody>
                         @foreach($users as $user)
-                            <tr>
-                                <td>{{$user->id}}</td>
-                                <td>{{$user->firstname}}</td>
-                                <td>{{$user->lastname}}</td>
-                                <td>{{$user->email}}</td>
-                                <td>{{$user->role->name}}</td>
-                                <td style="width: 200px">
-                                    <div class="d-flex justify-content-center align-center" style="gap:10px">
-                                        <a href="{{route('admin.view.user', $user->id)}}" class="btn btn-info btn-icon-split">
-                                            <span class="text">View</span>
-                                        </a>
-                                        <a href="{{route('admin.edit.user', $user->id)}}" class="btn btn-warning btn-icon-split">
-                                            <span class="text">Edit</span>
-                                        </a>
-                                        <a href="{{ route('admin.delete.user', $user->id) }}" id="delete-user" class="btn btn-danger btn-icon-split"
-                                            onclick="return confirm('Are you sure you want to delete this user?');">
-                                            <span class="text">Delete</span>
-                                        </a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr>
+                            <td>{{$user->id}}</td>
+                            <td>{{$user->firstname}}</td>
+                            <td>{{$user->lastname}}</td>
+                            <td>{{$user->email}}</td>
+                            <td>{{$user->role->name}}</td>
+                            <td style="width: 200px">
+                                <div class="d-flex justify-content-center align-center" style="gap:10px">
+                                    <a href="{{route('admin.view.user', $user->id)}}"
+                                        class="btn btn-info btn-icon-split">
+                                        <span class="text">View</span>
+                                    </a>
+                                    <a href="{{route('admin.edit.user', $user->id)}}"
+                                        class="btn btn-warning btn-icon-split">
+                                        <span class="text">Edit</span>
+                                    </a>
+                                    <a href="{{ route('admin.delete.user', $user->id) }}" id="delete-user"
+                                        class="btn btn-danger btn-icon-split"
+                                        onclick="return confirm('Are you sure you want to delete this user?');">
+                                        <span class="text">Delete</span>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                 </table>
+                <!-- Pagination links -->
+                <div class="d-flex justify-content-center" style="height: 100px;">
+                    {!! $users->links() !!}
+                </div>
             </div>
         </div>
     </div>
