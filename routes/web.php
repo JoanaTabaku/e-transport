@@ -1,15 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Panel\RolesController;
-use App\Http\Controllers\Panel\SubscriptionsController;
 use App\Http\Controllers\Panel\UsersController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\Panel\DashboardController;
+use App\Http\Controllers\Panel\NotificationsController;
+use App\Http\Controllers\Panel\SubscriptionsController;
 use App\Http\Controllers\Base\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -93,5 +95,12 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/admin/users/edit/{id}', [UsersController::class, 'update'])->name('admin.update.user');
     Route::get('/admin/users/delete/{id}', [UsersController::class, 'delete'])->name('admin.delete.user');
 
-
+    // Notifications
+    Route::get('/admin/notifications', [NotificationsController::class, 'index'])->name('admin.notifications');
+    Route::get('/admin/notifications/new', [NotificationsController::class, 'new'])->name('admin.new.notification');
+    Route::post('/admin/notifications/new', [NotificationsController::class, 'create'])->name('admin.create.notification');
+    Route::get('/admin/notifications/{id}', [NotificationsController::class, 'show'])->name('admin.view.notification');
+    Route::get('/admin/notifications/edit/{id}', [NotificationsController::class, 'edit'])->name('admin.edit.notification');
+    Route::post('/admin/notifications/edit/{id}', [NotificationsController::class, 'update'])->name('admin.update.notification');
+    Route::get('/admin/notifications/delete/{id}', [NotificationsController::class, 'delete'])->name('admin.delete.notification');
 });

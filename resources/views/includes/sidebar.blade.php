@@ -48,8 +48,8 @@
             <span>My Virtual Cards</span>
         </a>
     </li> --}}
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{Route::currentRouteName() == 'admin.subscriptions' ? 'active' : ''}}">
+        <a class="nav-link" href="{{route('admin.subscriptions')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Manage Subscriptions</span>
         </a>
@@ -72,8 +72,8 @@
             <span>Manage Roles</span>
         </a>
     </li>
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{Route::currentRouteName() == 'admin.notifications' ? 'active' : ''}}">
+        <a class="nav-link" href="{{route('admin.notifications')}}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Manage Notifications</span>
         </a>
