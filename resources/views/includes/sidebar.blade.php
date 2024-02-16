@@ -27,12 +27,15 @@
     <div class="sidebar-heading">
         Pages
     </div>
-    <li class="nav-item">
-        <a class="nav-link" href="index.html">
+    <!-- Profile Link -->
+    @auth
+    <li class="nav-item {{ Route::currentRouteName() == 'user.profile' ? 'active' : '' }}">
+        <a class="nav-link" href="{{ route('user.profile') }}">
             <i class="fas fa-fw fa-user"></i>
             <span>Profile</span>
         </a>
     </li>
+    @endauth
     {{-- <li class="nav-item">
         <a class="nav-link" href="index.html">
             <i class="fas fa-fw fa-tachometer-alt"></i>

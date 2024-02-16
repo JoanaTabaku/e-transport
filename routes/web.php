@@ -10,6 +10,8 @@ use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\NotificationsController;
 use App\Http\Controllers\Panel\SubscriptionsController;
+use App\Http\Controllers\Base\UserController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -53,9 +55,14 @@ Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
 // User Panel Routes
+
 Route::group(['middleware' => ['user']], function () {
     Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
+    Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
+    Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
+    Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.profile.update');
 });
+
 
 // Admin Panel Routes
 Route::group(['middleware' => ['admin']], function () {
