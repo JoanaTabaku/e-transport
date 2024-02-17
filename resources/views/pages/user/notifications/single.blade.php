@@ -7,7 +7,7 @@
             <div class="card shadow mb-4 pl-0" style="">
                 <div class="card-body d-flex flex-column" style="gap: 20px; padding: 80px 50px">
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Sent From:</h4>
+                        <h4 class="mb-0">Sender:</h4>
                         <p class="mb-0">{{$notification->sender->firstname}} {{$notification->sender->lastname}}</p>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
@@ -16,7 +16,7 @@
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
                         <h4 class="mb-0">Sent Date:</h4>
-                        <p class="mb-0">{{date('d-m-Y', strtotime($notification->sent_date))}}</p>
+                        <p class="mb-0">{{ date('d-m-Y H:i:s', strtotime($notification->sent_date)) }}</p>
                     </div>
                 </div>
                 <div class="card-footer" style="padding: 20px 50px">

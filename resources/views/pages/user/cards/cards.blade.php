@@ -4,7 +4,7 @@
  <div class="container-fluid">
 
     <!-- Page Heading -->
-    <h1 class="h3 mb-3 text-gray-800">My Notifications</h1>
+    <h1 class="h3 mb-3 text-gray-800">My Cards</h1>
 
     <!-- DataTales Example -->
     <div class="card shadow mb-4">
@@ -17,26 +17,29 @@
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>Sender</th>
-                            <th>Message</th>
-                            <th>Sent Date</th>
+                            <th>Subsription Name</th>
+                            <th>Serial Number</th>
+                            <th>Start Date</th>
+                            <th>End Date</th>
+                            <th>Status</th>
                             <th>Actions</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach($notifications as $notification)
+                        @foreach($cards as $card)
                             <tr>
-                                <td>{{$notification->sender->firstname}} {{$notification->sender->lastname}}</td>
-                                <td>{{$notification->message}}</td>
-                                <td>{{ date('d-m-Y H:i:s', strtotime($notification->sent_date)) }}</td>
-                                <td style="width: 300px">
+                                <td>
+                                    <a href="{{route('user.subscriptions')}}" target="_blank">
+                                        {{$card->subscriptionType->name}}
+                                    </a>
+                                </td>
+                                <td>{{$card->serial_number}}</td>
+                                <td>{{ date('d-m-Y', strtotime($card->start_date)) }}</td>
+                                <td>{{ date('d-m-Y', strtotime($card->end_date)) }}</td>
+                                <td class="@if($card->status == 'active') text-success font-weight-bold @else text-danger font-weight-bold @endif">{{$card->status}}</td>
+                                <td style="width: 200px">
                                     <div class="d-flex justify-content-center align-center" style="gap:10px">
-                                        @if($notification->is_read == null)
-                                            <a href="{{ route('user.read.notification', $notification->id) }}" id="read-notification" class="btn btn-primary btn-icon-split">
-                                                <span class="text">Mark as read</span>
-                                            </a>
-                                        @endif
-                                        <a href="{{route('user.view.notification', $notification->id)}}" class="btn btn-info btn-icon-split">
+                                        <a href="{{route('user.view.card', $card->id)}}" class="btn btn-info btn-icon-split">
                                             <span class="text">View</span>
                                         </a>
                                     </div>

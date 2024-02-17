@@ -1,0 +1,47 @@
+@extends('layouts.default')
+@section('content')
+ <div class="container-fluid">
+    <h1 class="h3 mb-3 text-gray-800">View Card</h1>
+    <div class="row justify-content-start">
+        <div class="col-5">
+            <div class="card shadow mb-4 pl-0" style="">
+                <div class="card-body d-flex flex-column" style="gap: 20px; padding: 80px 50px">
+                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
+                        <h4 class="mb-0">Subsription Name:</h4>
+                        <p class="mb-0">
+                            <a href="{{route('user.subscriptions', $card->subscriptionType->id)}}" target="_blank">
+                                {{$card->subscriptionType->name}}
+                            </a>
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
+                        <h4 class="mb-0">Serial Number:</h4>
+                        <h4 class="mb-0">{{$card->serial_number}}</h4>
+                    </div>
+                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
+                        <h4 class="mb-0">Start Date:</h4>
+                        <h4 class="mb-0">{{ date('d-m-Y', strtotime($card->start_date)) }}</h4>
+                    </div>
+                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
+                        <h4 class="mb-0">End Date:</h4>
+                        <h4 class="mb-0">{{ date('d-m-Y', strtotime($card->end_date)) }}</h4>
+                    </div>
+                    <div class="d-flex justify-content-between pb-4 @if($card->status == 'active') text-success font-weight-bold @else text-danger font-weight-bold @endif" style="border-bottom: 1px solid lightgray">
+                        <h4 class="mb-0">Status:</h4>
+                        <h4 class="mb-0">{{$card->status}}</h4>
+                    </div>
+                </div>
+                <div class="card-footer" style="padding: 20px 50px">
+                    <div class="actions">
+                        <div class="d-flex justify-content-center align-center" style="gap:10px">
+                            <a href="{{route('user.cards')}}" class="btn btn-info btn-icon-split">
+                                <span class="text">Go back</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+ </div>
+@stop
