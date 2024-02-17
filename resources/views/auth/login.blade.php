@@ -40,6 +40,16 @@
                                 <div class="text-center">
                                     <a class="small" href="{{route ('register') }}">Create an Account!</a>
                                 </div>
+                                 <!-- Display validation errors -->
+                                 @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach ($errors->all() as $error)
+                                                <li>{{ $error }}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>

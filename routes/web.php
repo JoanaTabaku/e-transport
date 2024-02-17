@@ -3,7 +3,6 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\AdminController;
-use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Panel\RolesController;
 use App\Http\Controllers\Panel\UsersController;
 use App\Http\Controllers\Auth\RegisterController;
@@ -56,9 +55,13 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Search filter
+Route::get('/admin/users/search', [UsersController::class, 'searchUsers'])->name('admin.users.search');
+
+//Clear search filter
+Route::get('/admin/users/clear', [UsersController::class, 'clearSearch'])->name('admin.users.clear');
 
 // User Panel Routes
-
 Route::group(['middleware' => ['user']], function () {
     Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
@@ -77,6 +80,7 @@ Route::group(['middleware' => ['user']], function () {
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
+    //Profile
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
@@ -117,4 +121,6 @@ Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin/notifications/edit/{id}', [NotificationsController::class, 'edit'])->name('admin.edit.notification');
     Route::post('/admin/notifications/edit/{id}', [NotificationsController::class, 'update'])->name('admin.update.notification');
     Route::get('/admin/notifications/delete/{id}', [NotificationsController::class, 'delete'])->name('admin.delete.notification');
+
+    
 });
