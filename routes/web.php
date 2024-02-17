@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AdminController;
+// use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Panel\RolesController;
 use App\Http\Controllers\Panel\UsersController;
@@ -11,6 +11,9 @@ use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\NotificationsController;
 use App\Http\Controllers\Panel\SubscriptionsController;
 use App\Http\Controllers\Base\UserController;
+use App\Http\Controllers\Base\AdminController;
+
+
 
 
 /*
@@ -73,6 +76,11 @@ Route::group(['middleware' => ['user']], function () {
 // Admin Panel Routes
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+
+    Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
+    Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
+    Route::post('/admin/profile/update', [AdminController::class, 'updateProfile'])->name('admin.profile.update');
 
     // Subscriptions
     Route::get('/admin/subscriptions', [SubscriptionsController::class, 'index'])->name('admin.subscriptions');
