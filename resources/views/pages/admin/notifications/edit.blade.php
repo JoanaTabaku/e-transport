@@ -10,42 +10,21 @@
                     <div class="card shadow mb-4 pl-0" style="">
                         <div class="card-body d-flex flex-column" style="gap: 10px; padding: 50px 50px">
                             <div class="form-group">
-                                <label for="name">Notification Name</label>
-                                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name', $notification->name) }}" aria-describedby="name">
-                                @error('name')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="text" class="form-control @error('price') is-invalid @enderror" name="price" id="price" value="{{ old('price', $notification->price) }}" aria-describedby="price">
-                                @error('price')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <input type="text" class="form-control @error('description') is-invalid @enderror" name="description" id="description" value="{{ old('description', $notification->description) }}" aria-describedby="description">
-                                @error('description')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="duration_in_days">Expires in (days)</label>
-                                <input type="text" class="form-control @error('duration_in_days') is-invalid @enderror" name="duration_in_days" id="duration_in_days" value="{{ old('duration_in_days', $notification->duration_in_days) }}" aria-describedby="duration_in_days">
-                                @error('duration_in_days')
-                                    <div class="invalid-feedback">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <div class="form-group">
-                                <label for="role">Role</label>
-                                <select class="form-control @error('role_id') is-invalid @enderror" name="role_id" id="role">
-                                    <option value="">Select a role</option>
-                                    @foreach($roles as $role)
-                                        <option value="{{ $role->id }}" {{ old('role_id', $notification->role_id) == $role->id ? 'selected' : '' }}>{{ $role->name }}</option>
+                                <label for="to_user_id">Send to</label>
+                                <select class="form-control @error('to_user_id') is-invalid @enderror" name="to_user_id" id="to_user_id">
+                                    <option value="">Select a user</option>
+                                    @foreach($users as $user)
+                                        <option value="{{ $user->id }}" {{ old('to_user_id', $notification->to_user_id) == $user->id ? 'selected' : '' }}>{{ $user->firstname }} {{ $user->lastname }}</option>
                                     @endforeach
                                 </select>
-                                @error('role_id')
+                                @error('to_user_id')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message</label>
+                                <input type="text" class="form-control @error('message') is-invalid @enderror" name="message" id="message" value="{{ old('message', $notification->message) }}" aria-describedby="message">
+                                @error('message')
                                     <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>

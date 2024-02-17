@@ -11,10 +11,6 @@
                         <p class="mb-0">{{$notification->sender->firstname}} {{$notification->sender->lastname}}</p>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">To User From:</h4>
-                        <p class="mb-0">{{$notification->receiver->firstname}} {{$notification->receiver->lastname}}</p>
-                    </div>
-                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
                         <h4 class="mb-0">Message:</h4>
                         <p class="mb-0">{{$notification->message}}</p>
                     </div>
@@ -22,23 +18,17 @@
                         <h4 class="mb-0">Sent Date:</h4>
                         <p class="mb-0">{{date('d-m-Y', strtotime($notification->sent_date))}}</p>
                     </div>
-                    <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Is Read:</h4>
-                        <p class="mb-0">{{$notification->is_read ? 'Yes' : 'No'}}</p>
-                    </div>
                 </div>
                 <div class="card-footer" style="padding: 20px 50px">
                     <div class="actions">
                         <div class="d-flex justify-content-center align-center" style="gap:10px">
-                            <a href="{{route('admin.notifications')}}" class="btn btn-info btn-icon-split">
+                            @if($notification->is_read == null)
+                                <a href="{{ route('user.read.notification', $notification->id) }}" id="read-notification" class="btn btn-primary btn-icon-split">
+                                    <span class="text">Mark as read</span>
+                                </a>
+                            @endif
+                            <a href="{{route('user.notifications')}}" class="btn btn-info btn-icon-split">
                                 <span class="text">Go back</span>
-                            </a>
-                            <a href="{{route('admin.edit.notification', $notification->id)}}" class="btn btn-warning btn-icon-split">
-                                <span class="text">Edit</span>
-                            </a>
-                            <a href="{{ route('admin.delete.notification', $notification->id) }}" id="delete-notification" class="btn btn-danger btn-icon-split"
-                                onclick="return confirm('Are you sure you want to delete this notification?');">
-                                <span class="text">Delete</span>
                             </a>
                         </div>
                     </div>

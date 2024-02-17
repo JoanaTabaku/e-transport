@@ -61,6 +61,12 @@ Route::group(['middleware' => ['user']], function () {
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
     Route::get('/profile/edit', [UserController::class, 'editProfile'])->name('user.profile.edit');
     Route::post('/profile/update', [UserController::class, 'updateProfile'])->name('user.profile.update');
+
+    // Notifications
+    Route::get('/notifications', [NotificationsController::class, 'userNotifications'])->name('user.notifications');
+    Route::get('/notifications/{id}', [NotificationsController::class, 'userShow'])->name('user.view.notification');
+    Route::get('/notifications/read/{id}', [NotificationsController::class, 'markAsRead'])->name('user.read.notification');
+
 });
 
 
