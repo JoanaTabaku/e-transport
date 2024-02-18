@@ -36,9 +36,13 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// Search filter
+Route::get('/admin/users/search', [UsersController::class, 'searchUsers'])->name('admin.users.search');
+
+//Clear search filter
+Route::get('/admin/users/clear', [UsersController::class, 'clearSearch'])->name('admin.users.clear');
 
 // User Panel Routes
-
 Route::group(['middleware' => ['user']], function () {
     Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
     Route::get('/profile', [UserController::class, 'userProfile'])->name('user.profile');
@@ -66,6 +70,7 @@ Route::group(['middleware' => ['user']], function () {
 Route::group(['middleware' => ['admin']], function () {
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
 
+    //Profile
     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/profile', [AdminController::class, 'adminProfile'])->name('admin.profile');
     Route::get('/admin/profile/edit', [AdminController::class, 'editProfile'])->name('admin.profile.edit');
@@ -113,5 +118,4 @@ Route::group(['middleware' => ['admin']], function () {
     // Route::get('/admin/cards/edit/{id}', [CardsController::class, 'edit'])->name('admin.edit.card');
     // Route::post('/admin/cards/edit/{id}', [CardsController::class, 'update'])->name('admin.update.card');
     Route::get('/admin/cards/delete/{id}', [CardsController::class, 'delete'])->name('admin.delete.card');
-
 });

@@ -19,6 +19,19 @@
             </div>
         </div>
         <div class="card-body">
+            <form action="{{ route('admin.users.search') }}" method="GET">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search users by name or email" name="search"
+                        value="{{ request('search') }}">
+                    <div class="input-group-append">
+                        <button class="btn btn-primary" type="submit">Search</button>
+                        @if(request('search'))
+                        <a href="{{ route('admin.users.clear') }}" class="btn btn-secondary">Clear</a>
+                        @endif
+                    </div>
+                </div>
+            </form>
+
             <div class="table-responsive">
                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
@@ -61,8 +74,8 @@
                     </tbody>
                 </table>
                 <!-- Pagination links -->
-                <div class="d-flex justify-content-center" style="height: 100px;">
-                    {!! $users->links() !!}
+                <div>
+                    {{ $users->onEachSide(2)->links('pagination.custom_pagination') }}
                 </div>
             </div>
         </div>
