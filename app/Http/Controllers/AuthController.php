@@ -12,6 +12,7 @@ use App\Models\Role;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
+
 {
     public function showLoginForm()
     {
@@ -43,7 +44,7 @@ class AuthController extends Controller
             return redirect()->route('user.dashboard'); // Or 'admin.dashboard' depending on the user's role
         }
       
-        $roles = Role::all();
+        $roles = Role::where('name', '!=', 'admin')->get();
         return view('auth.register', compact('roles'));
     }
 

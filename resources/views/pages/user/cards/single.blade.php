@@ -5,9 +5,9 @@
     <div class="row justify-content-start">
         <div class="col-5">
             <div class="card shadow mb-4 pl-0" style="">
-                <div class="card-body d-flex flex-column" style="gap: 20px; padding: 80px 50px">
+                <div class="card-body d-flex flex-column" style="gap: 20px">
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Subsription Name:</h4>
+                        <h5 class="mb-0">Subsription Name:</h5>
                         <p class="mb-0">
                             <a href="{{route('user.subscriptions', $card->subscriptionType->id)}}" target="_blank">
                                 {{$card->subscriptionType->name}}
@@ -15,20 +15,20 @@
                         </p>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Serial Number:</h4>
-                        <h4 class="mb-0">{{$card->serial_number}}</h4>
+                        <h5 class="mb-0">Serial Number:</h5>
+                        <h5 class="mb-0">{{$card->serial_number}}</h5>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Start Date:</h4>
-                        <h4 class="mb-0">{{ date('d-m-Y', strtotime($card->start_date)) }}</h4>
+                        <h5 class="mb-0">Start Date:</h5>
+                        <h5 class="mb-0">{{ date('d-m-Y', strtotime($card->start_date)) }}</h5>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">End Date:</h4>
-                        <h4 class="mb-0">{{ date('d-m-Y', strtotime($card->end_date)) }}</h4>
+                        <h5 class="mb-0">End Date:</h5>
+                        <h5 class="mb-0">{{ date('d-m-Y', strtotime($card->end_date)) }}</h5>
                     </div>
                     <div class="d-flex justify-content-between pb-4 @if($card->status == 'active') text-success font-weight-bold @else text-danger font-weight-bold @endif" style="border-bottom: 1px solid lightgray">
-                        <h4 class="mb-0">Status:</h4>
-                        <h4 class="mb-0">{{$card->status}}</h4>
+                        <h5 class="mb-0">Status:</h5>
+                        <h5 class="mb-0">{{$card->status}}</h5>
                     </div>
                 </div>
                 <div class="card-footer" style="padding: 20px 50px">

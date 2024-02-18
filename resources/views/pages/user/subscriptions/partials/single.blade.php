@@ -51,26 +51,26 @@
             Current Plan
         </span>
     @endif
-    <div class="card-body d-flex flex-column" style="gap: 20px; padding: 100px 50px">
+    <div class="card-body d-flex flex-column" style="gap: 20px; padding: 90px 10px">
         <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-            <h4 class="mb-0">Subscription Name:</h4>
-            <h4 class="mb-0" style="font-weight: bold">{{$subscription->name}}</h4>
+            <h6 class="mb-0">Subscription Name:</h6>
+            <h6 class="mb-0" style="font-weight: bold">{{$subscription->name}}</h6>
         </div>
         <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-            <h4 class="mb-0">Price:</h4>
-            <h5 class="mb-0">{{$subscription->price}}</h5>
+            <h6 class="mb-0">Price:</h6>
+            <h6 class="mb-0">{{$subscription->price}}</h6>
         </div>
         <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-            <h4 class="mb-0">Description:</h4>
-            <h5 class="mb-0">{{$subscription->description}}</h5>
+            <h6 class="mb-0">Description:</h6>
+            <h6 class="mb-0">{{$subscription->description}}</h6>
         </div>
         <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-            <h4 class="mb-0">Expires in (days):</h4>
-            <h5 class="mb-0">{{$subscription->duration_in_days}}</h5>
+            <h6 class="mb-0">Expires in (days):</h6>
+            <h6 class="mb-0">{{$subscription->duration_in_days}}</h6>
         </div>
         <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
-            <h4 class="mb-0">Role:</h4>
-            <h5 class="mb-0">{{$subscription->role->name}}</h5>
+            <h6 class="mb-0">Role:</h6>
+            <h6 class="mb-0">{{$subscription->role->name}}</h6>
         </div>
     </div>
     <div class="card-footer" style="padding: 20px 50px">
