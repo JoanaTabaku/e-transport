@@ -39,7 +39,7 @@
                                 <td>{{$notification->sender->firstname}} {{$notification->sender->lastname}}</td>
                                 <td>{{$notification->receiver->firstname}} {{$notification->receiver->lastname}}</td>
                                 <td>{{$notification->message}}</td>
-                                <td>{{date('d-m-Y', strtotime($notification->sent_date))}}</td>
+                                <td>{{ date('d-m-Y H:i:s', strtotime($notification->sent_date)) }}</td>
                                 <td>{{$notification->is_read ? 'Yes' : 'No'}}</td>
                                 <td style="width: 200px">
                                     <div class="d-flex justify-content-center align-center" style="gap:10px">

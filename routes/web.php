@@ -3,14 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 // use App\Http\Controllers\AdminController;
+use App\Http\Controllers\Base\UserController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Base\AdminController;
+use App\Http\Controllers\Panel\CardsController;
 use App\Http\Controllers\Panel\RolesController;
 use App\Http\Controllers\Panel\UsersController;
 use App\Http\Controllers\Auth\RegisterController;
 use App\Http\Controllers\Panel\DashboardController;
 use App\Http\Controllers\Panel\NotificationsController;
 use App\Http\Controllers\Panel\SubscriptionsController;
-use App\Http\Controllers\Base\UserController;
-use App\Http\Controllers\Base\AdminController;
 
 
 
@@ -25,27 +27,6 @@ use App\Http\Controllers\Base\AdminController;
 | the "web" middleware group. Make something great!
 |
 */
-
-// // Registration routes
-// Route::get('/register', [AuthController::class, 'showRegistrationForm'])->name('register');
-// Route::post('/register', [AuthController::class, 'register']);
-
-// // Login routes
-// Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-// Route::post('/login', [AuthController::class, 'login']); // Update to accept POST method
-
-
-
-// // Panel Routes
-// Route::get('/', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
-// Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
-
-
-// Redirect unauthenticated users to the login form
-// Route::middleware('auth')->group(function () {
-//     Route::get('/dashboard', [DashboardController::class, 'userDashboard'])->name('user.dashboard');
-//     Route::get('/admin', [DashboardController::class, 'adminDashboard'])->name('admin.dashboard');
-// });
 
 // Login and registration routes
 Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
@@ -72,6 +53,15 @@ Route::group(['middleware' => ['user']], function () {
     Route::get('/notifications', [NotificationsController::class, 'userNotifications'])->name('user.notifications');
     Route::get('/notifications/{id}', [NotificationsController::class, 'userShow'])->name('user.view.notification');
     Route::get('/notifications/read/{id}', [NotificationsController::class, 'markAsRead'])->name('user.read.notification');
+
+    // Subscriptions
+    Route::get('/subscriptions', [SubscriptionsController::class, 'userSubscriptions'])->name('user.subscriptions');
+    Route::get('/subscription/purchase/{subscriptionId}', [SubscriptionsController::class, 'purchaseSubscription'])->name('subscription.purchase');
+    Route::get('/subscription/callback/{id}', [SubscriptionsController::class, 'handlePaymentCallback'])->name('subscription.callback');
+
+    // Cards
+    Route::get('/cards', [CardsController::class, 'userCards'])->name('user.cards');
+    Route::get('/cards/{id}', [CardsController::class, 'userShow'])->name('user.view.card');
 
 });
 
@@ -122,5 +112,10 @@ Route::group(['middleware' => ['admin']], function () {
     Route::post('/admin/notifications/edit/{id}', [NotificationsController::class, 'update'])->name('admin.update.notification');
     Route::get('/admin/notifications/delete/{id}', [NotificationsController::class, 'delete'])->name('admin.delete.notification');
 
-    
+    // Cards
+    Route::get('/admin/cards', [CardsController::class, 'index'])->name('admin.cards');
+    Route::get('/admin/cards/{id}', [CardsController::class, 'show'])->name('admin.view.card');
+    // Route::get('/admin/cards/edit/{id}', [CardsController::class, 'edit'])->name('admin.edit.card');
+    // Route::post('/admin/cards/edit/{id}', [CardsController::class, 'update'])->name('admin.update.card');
+    Route::get('/admin/cards/delete/{id}', [CardsController::class, 'delete'])->name('admin.delete.card');
 });

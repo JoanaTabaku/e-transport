@@ -5,10 +5,19 @@ namespace App\Http\Controllers\Panel;
 use App\Models\Role;
 use Illuminate\Http\Request;
 use App\Models\SubscriptionType;
+use App\Models\Card;
 use App\Http\Controllers\Controller;
+use App\Services\PayPalService;
 
 class SubscriptionsController extends Controller
 {
+    protected $paypalService;
+
+    public function __construct(PayPalService $paypalService)
+    {
+        $this->paypalService = $paypalService;
+    }
+
     public function index()
     {
         $subscriptions = SubscriptionType::all();
@@ -90,9 +99,58 @@ class SubscriptionsController extends Controller
         if (!$subscription) {
             return redirect()->route('admin.subscriptions')->with('error', 'Subscription not found.');
         }
-
         $subscription->delete();
 
         return redirect()->route('admin.subscriptions')->with('success', 'Subscription deleted successfully.');
     }
+
+    // user methods
+    public function userSubscriptions()
+    {
+        $lastBoughtSubscriptionId = null;
+        $subscriptions = SubscriptionType::where('role_id', auth()->user()->role_id)->get();
+        $lastBoughtCard = auth()->user()->cards()->latest()->first();
+
+        if ($lastBoughtCard && $lastBoughtCard->status === 'active') {
+            $lastBoughtSubscriptionId = $lastBoughtCard->subscriptionType->id;
+        }
+
+        return view('pages.user.subscriptions.subscriptions', compact('subscriptions', 'lastBoughtSubscriptionId'));
+    }
+
+    public function purchaseSubscription($subscriptionId)
+    {
+        $subscription = SubscriptionType::find($subscriptionId);
+
+        // Use PayPalService to create a payment and redirect to PayPal
+        $approvalUrl = $this->paypalService->createOrder($subscription);
+        return redirect($approvalUrl);
+    }
+
+    public function handlePaymentCallback($subscriptionId)
+    {
+        if (!$subscriptionId) {
+            return redirect()->route('user.subscriptions')->with('error', 'Subscription not found.');
+        }
+
+        // disable the last active card
+        $lastBoughtCard = auth()->user()->cards()->latest()->first();
+        if ($lastBoughtCard && $lastBoughtCard->status === 'active') {
+            $lastBoughtCard->update(['status' => 'disabled']);
+        }
+
+        // create a new card
+        $subscription = SubscriptionType::find($subscriptionId);
+        $card = Card::create([
+            'serial_number' => uniqid(),
+            'start_date' => now(),
+            'end_date' => now()->addDays($subscription->duration_in_days),
+            'status' => 'active',
+            'user_id' => auth()->id(),
+            'subscription_type_id' => $subscription->id,
+        ]);
+
+        return redirect()->route('user.subscriptions')->with('success', 'Subscription purchased successfully. A new virtual card has been created.');
+    }
+
 }

@@ -20,7 +20,7 @@
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
                         <h4 class="mb-0">Sent Date:</h4>
-                        <p class="mb-0">{{date('d-m-Y', strtotime($notification->sent_date))}}</p>
+                        <p class="mb-0">{{ date('d-m-Y H:i:s', strtotime($notification->sent_date)) }}</p>
                     </div>
                     <div class="d-flex justify-content-between pb-4" style="border-bottom: 1px solid lightgray">
                         <h4 class="mb-0">Is Read:</h4>
