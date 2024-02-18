@@ -56,7 +56,7 @@ class AuthController extends Controller
             'lastname' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required', // Assuming you have a field named 'role' in your registration form
+            'role' => 'required', 
         ];
 
         // Run validation

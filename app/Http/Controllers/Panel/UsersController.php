@@ -6,19 +6,17 @@ use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Pagination\Paginator;
-
 
 class UsersController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        // $users = User::orderBy('id', 'desc')->get();
-        // return view('pages.admin.users.users', compact('users'));
-
-        $users = User::orderBy('id', 'desc')->paginate(5); // Paginate with 5 users per page
+        if ($request->has('search')) {
+            return $this->searchUsers($request);
+        }
+    
+        $users = User::orderBy('id', 'asc')->paginate(5);
         return view('pages.admin.users.users', compact('users'));
-        
     }
 
     public function show($userId)
@@ -108,5 +106,27 @@ class UsersController extends Controller
 
         return redirect()->route('admin.users')->with('success', 'User deleted successfully.');
     }
+
+    public function searchUsers(Request $request)
+    {
+        $search = $request->input('search');
+    
+        $users = User::where('firstname', 'like', '%' . $search . '%')
+                     ->orWhere('lastname', 'like', '%' . $search . '%')
+                     ->orWhere('email', 'like', '%' . $search . '%')
+                     ->orderBy('id', 'desc')
+                     ->paginate(5);
+    
+        // Preserve the search query in the pagination links
+        $users->appends(['search' => $search]);
+    
+        return view('pages.admin.users.users', compact('users'));
+    }
+    
+    public function clearSearch()
+{
+    // Redirect to the index page without the search parameter
+    return redirect()->route('admin.users');
+}
 
 }
