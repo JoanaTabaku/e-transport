@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="card-body">
-            <form action="{{ route('admin.users.search') }}" method="GET">
+            <form action="{{ route('admin.users') }}" method="GET">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Search users by name or email" name="search"
                         value="{{ request('search') }}">
