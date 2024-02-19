@@ -42,7 +42,7 @@
                                             <span class="text">Edit</span>
                                         </a>
                                         <a href="{{ route('admin.delete.role', $role->id) }}" id="delete-role" class="btn btn-danger btn-icon-split"
-                                            onclick="return confirm('Are you sure you want to delete this role?');">
+                                            onclick="return confirm('Are you sure you want to delete this role? This action will delete all associated records in the following tables: users, subscriptions. This operation is irreversible.');">
                                             <span class="text">Delete</span>
                                         </a>
                                     </div>

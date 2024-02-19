@@ -50,7 +50,7 @@
                                             <span class="text">Edit</span>
                                         </a>
                                         <a href="{{ route('admin.delete.subscription', $subscription->id) }}" id="delete-subscription" class="btn btn-danger btn-icon-split"
-                                            onclick="return confirm('Are you sure you want to delete this subscription?');">
+                                            onclick="return confirm('Are you sure you want to delete this subscription? This action will delete all associated records in the following tables: cards. This operation is irreversible.');">
                                             <span class="text">Delete</span>
                                         </a>
                                     </div>

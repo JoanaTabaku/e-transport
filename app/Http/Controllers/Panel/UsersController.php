@@ -14,8 +14,8 @@ class UsersController extends Controller
         if ($request->has('search')) {
             return $this->searchUsers($request);
         }
-    
-        $users = User::orderBy('id', 'asc')->paginate(5);
+
+        $users = User::where('role_id', '!=', 1)->orderBy('id', 'asc')->paginate(5);
         return view('pages.admin.users.users', compact('users'));
     }
 
@@ -110,19 +110,19 @@ class UsersController extends Controller
     public function searchUsers(Request $request)
     {
         $search = $request->input('search');
-    
+
         $users = User::where('firstname', 'like', '%' . $search . '%')
                      ->orWhere('lastname', 'like', '%' . $search . '%')
                      ->orWhere('email', 'like', '%' . $search . '%')
                      ->orderBy('id', 'desc')
                      ->paginate(5);
-    
+
         // Preserve the search query in the pagination links
         $users->appends(['search' => $search]);
-    
+
         return view('pages.admin.users.users', compact('users'));
     }
-    
+
     public function clearSearch()
 {
     // Redirect to the index page without the search parameter

@@ -64,7 +64,7 @@
                                     </a>
                                     <a href="{{ route('admin.delete.user', $user->id) }}" id="delete-user"
                                         class="btn btn-danger btn-icon-split"
-                                        onclick="return confirm('Are you sure you want to delete this user?');">
+                                        onclick="return confirm('Are you sure you want to delete this user? This action will delete all associated records in the following tables: cards, notifications. This operation is irreversible.')";>
                                         <span class="text">Delete</span>
                                     </a>
                                 </div>
